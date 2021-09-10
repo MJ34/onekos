@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">One Kost</string>
     <string name="sub">Silahkan Login menggunakan account <b>Google</b> anda</string>
-    <!--  <string name="default_web_client_id">127985366022-uh2ighm5o3tdsmfu4j5vjd297k0uv44j.apps.googleusercontent.com</string>-->
 </resources>
