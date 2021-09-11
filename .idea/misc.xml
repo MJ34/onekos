@@ -9,14 +9,16 @@
         <entry key="..\:/Users/MSII/AndroidStudioProjects/OneKost/app/src/main/res/drawable/layout_yellow.xml" value="0.1" />
         <entry key="..\:/Users/MSII/AndroidStudioProjects/OneKost/app/src/main/res/layout/activity_home_screen.xml" value="0.264" />
         <entry key="..\:/Users/MSII/AndroidStudioProjects/OneKost/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/MSII/AndroidStudioProjects/OneKost/app/src/main/res/layout/activity_sign_in.xml" value="0.2" />
+        <entry key="..\:/Users/MSII/AndroidStudioProjects/OneKost/app/src/main/res/layout/activity_profile.xml" value="0.4" />
+        <entry key="..\:/Users/MSII/AndroidStudioProjects/OneKost/app/src/main/res/layout/activity_sign_in.xml" value="0.16" />
         <entry key="..\:/Users/MSII/AndroidStudioProjects/OneKost/app/src/main/res/layout/fragment_chat.xml" value="0.264" />
         <entry key="..\:/Users/MSII/AndroidStudioProjects/OneKost/app/src/main/res/layout/fragment_dashboard.xml" value="0.32407407407407407" />
         <entry key="..\:/Users/MSII/AndroidStudioProjects/OneKost/app/src/main/res/layout/fragment_location.xml" value="0.1" />
         <entry key="..\:/Users/MSII/AndroidStudioProjects/OneKost/app/src/main/res/layout/fragment_waiting.xml" value="0.264" />
+        <entry key="..\:/Users/MSII/AndroidStudioProjects/OneKost/app/src/main/res/layout/item_list_adapter.xml" value="0.1" />
         <entry key="..\:/Users/MSII/AndroidStudioProjects/OneKost/app/src/main/res/layout/item_list_putra.xml" value="0.1265625" />
         <entry key="..\:/Users/MSII/AndroidStudioProjects/OneKost/app/src/main/res/layout/item_list_putri.xml" value="0.1265625" />
-        <entry key="..\:/Users/MSII/AndroidStudioProjects/OneKost/app/src/main/res/layout/proggres_bar.xml" value="0.1" />
+        <entry key="..\:/Users/MSII/AndroidStudioProjects/OneKost/app/src/main/res/layout/proggres_bar.xml" value="0.264" />
       </map>
     </option>
   </component>

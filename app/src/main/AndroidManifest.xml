@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoActionBar">
         <activity
+            android:name=".dashboard.profile.ProfileActivity"
+            android:exported="true" />
+        <activity
             android:name=".home.HomeScreenActivity"
             android:exported="true" />
         <activity

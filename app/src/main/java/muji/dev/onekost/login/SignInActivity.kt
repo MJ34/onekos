@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -45,6 +46,11 @@ class SignInActivity : AppCompatActivity() {
         signInBinding.btnLogin.setOnClickListener {
             signIn()
         }
+
+        Glide.with(this)
+            .load("https://firebasestorage.googleapis.com/v0/b/one-kos.appspot.com/o/pexels-pixabay-271743.jpg?alt=media&token=97ed5d74-95cd-4c01-ade6-f60a3620ae09")
+            .placeholder(R.drawable.progress_animation)
+            .into(signInBinding.imageLogin)
     }
 
     private fun signIn() {
