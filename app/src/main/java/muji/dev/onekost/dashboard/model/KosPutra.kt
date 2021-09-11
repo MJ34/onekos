@@ -1,4 +1,4 @@
-package muji.dev.onekost.dashboard.kosputra.model
+package muji.dev.onekost.dashboard.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
@@ -14,7 +14,7 @@ class KosPutra(
     var gambar2: String? = "",
     var gambar3: String? = "",
     var poster: String? = "",
-    var price: String? = "",
+    var price: Int? = null,
     var rating: String? = "",
     var tempat: String? = "",
     var wifi: String? = ""

@@ -8,7 +8,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import muji.dev.onekost.R
-import muji.dev.onekost.dashboard.kosputra.model.ImageData
+import muji.dev.onekost.dashboard.model.ImageData
 
 class ImageAdapter(private var imageList: ArrayList<ImageData>):RecyclerView.Adapter<ImageAdapter.ImageHolder>() {
 

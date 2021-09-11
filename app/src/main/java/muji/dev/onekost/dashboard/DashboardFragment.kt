@@ -6,16 +6,29 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import muji.dev.onekost.R
-import muji.dev.onekost.dashboard.kosputra.model.ImageData
+import muji.dev.onekost.dashboard.kosputra.AdapterPutra
+import muji.dev.onekost.dashboard.kosputri.AdapterPutri
+import muji.dev.onekost.dashboard.model.ImageData
+import muji.dev.onekost.dashboard.model.KosPutra
+import muji.dev.onekost.dashboard.model.KosPutri
 import muji.dev.onekost.dashboard.profile.ProfileActivity
 import muji.dev.onekost.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
 
     private var imageList = ArrayList<ImageData>()
+    private var dataPutra = ArrayList<KosPutra>()
+    private var dataPutri = ArrayList<KosPutri>()
+
+    private lateinit var adapterPutra: AdapterPutra
+    private lateinit var adapterPutri: AdapterPutri
+    private lateinit var databaseReference: DatabaseReference
     private lateinit var adapter: ImageAdapter
     private lateinit var dashboardBinding: FragmentDashboardBinding
     private lateinit var auth: FirebaseAuth
@@ -72,5 +85,40 @@ class DashboardFragment : Fragment() {
             val intent = Intent(context, ProfileActivity::class.java)
             startActivity(intent)
         }
+
+        adapterPutra = AdapterPutra(dataPutra) {
+
+        }
+
+        adapterPutri = AdapterPutri(dataPutri) {
+
+        }
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Dashboard")
+        dashboardBinding.rvKosputra.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        dashboardBinding.rvKosputri.layoutManager = LinearLayoutManager(requireContext())
+
+        databaseReference.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                dataPutra.clear()
+                for (item in snapshot.child("KosPutra").children) {
+                    val putra = item.getValue(KosPutra::class.java)
+                    dataPutra.add(putra!!)
+                }
+                dashboardBinding.rvKosputra.adapter = adapterPutra
+
+                dataPutri.clear()
+                for (item in snapshot.child("KosPutri").children) {
+                    val putri = item.getValue(KosPutri::class.java)
+                    dataPutri.add(putri!!)
+                }
+                dashboardBinding.rvKosputri.adapter = adapterPutri
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 }
