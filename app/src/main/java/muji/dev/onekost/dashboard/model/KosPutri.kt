@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 class KosPutri (
     var bathroom: String? = "",
     var bed: String? = "",
-    var breakfash: String? = "",
+    var breakfast: String? = "",
     var category: String? = "",
     var desc: String? = "",
     var gambar1: String? = "",

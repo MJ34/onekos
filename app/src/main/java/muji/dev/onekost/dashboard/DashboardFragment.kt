@@ -13,12 +13,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import muji.dev.onekost.R
 import muji.dev.onekost.dashboard.kosputra.AdapterPutra
+import muji.dev.onekost.dashboard.kosputra.DetailPutraActivity
 import muji.dev.onekost.dashboard.kosputri.AdapterPutri
 import muji.dev.onekost.dashboard.model.ImageData
 import muji.dev.onekost.dashboard.model.KosPutra
 import muji.dev.onekost.dashboard.model.KosPutri
 import muji.dev.onekost.dashboard.profile.ProfileActivity
 import muji.dev.onekost.databinding.FragmentDashboardBinding
+import muji.dev.onekost.home.ProggresDialog
 
 class DashboardFragment : Fragment() {
 
@@ -42,7 +44,7 @@ class DashboardFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         dashboardBinding = FragmentDashboardBinding.inflate(layoutInflater)
         return (dashboardBinding.root)
     }
@@ -58,6 +60,7 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getKos()
 
         auth = FirebaseAuth.getInstance()
 
@@ -87,17 +90,25 @@ class DashboardFragment : Fragment() {
         }
 
         adapterPutra = AdapterPutra(dataPutra) {
-
+            val intent = Intent(requireContext(), DetailPutraActivity::class.java)
+                .putExtra("putra", it)
+            startActivity(intent)
         }
 
         adapterPutri = AdapterPutri(dataPutri) {
 
         }
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Dashboard")
+
         dashboardBinding.rvKosputra.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         dashboardBinding.rvKosputri.layoutManager = LinearLayoutManager(requireContext())
 
+    }
+
+    private fun getKos() {
+        val show = ProggresDialog(requireActivity())
+        show.showLoading()
+        databaseReference = FirebaseDatabase.getInstance().getReference("Dashboard")
         databaseReference.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 dataPutra.clear()
@@ -113,10 +124,12 @@ class DashboardFragment : Fragment() {
                     dataPutri.add(putri!!)
                 }
                 dashboardBinding.rvKosputri.adapter = adapterPutri
+                show.dismissLoading()
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
+                show.showLoading()
             }
 
         })
