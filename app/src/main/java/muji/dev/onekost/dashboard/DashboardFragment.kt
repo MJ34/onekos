@@ -15,6 +15,7 @@ import muji.dev.onekost.R
 import muji.dev.onekost.dashboard.kosputra.AdapterPutra
 import muji.dev.onekost.dashboard.kosputra.DetailPutraActivity
 import muji.dev.onekost.dashboard.kosputri.AdapterPutri
+import muji.dev.onekost.dashboard.kosputri.DetailPutriActivity
 import muji.dev.onekost.dashboard.model.ImageData
 import muji.dev.onekost.dashboard.model.KosPutra
 import muji.dev.onekost.dashboard.model.KosPutri
@@ -96,7 +97,9 @@ class DashboardFragment : Fragment() {
         }
 
         adapterPutri = AdapterPutri(dataPutri) {
-
+            val intent = Intent(requireContext(), DetailPutriActivity::class.java)
+                .putExtra("putri", it)
+            startActivity(intent)
         }
 
 
