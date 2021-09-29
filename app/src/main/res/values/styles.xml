@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Textview_nama">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="Textview_sub">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+</resources>

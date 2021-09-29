@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">One Kost</string>
     <string name="sub">Silahkan Login menggunakan account <b>Google</b> anda</string>
+    <string name="semarang">Semarang</string>
+    <string name="kos_putra">Kos Putra</string>
+    <string name="idr_240_000">IDR 240.000</string>
 </resources>

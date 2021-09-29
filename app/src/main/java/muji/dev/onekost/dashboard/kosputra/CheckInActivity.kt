@@ -145,52 +145,50 @@ class CheckInActivity : AppCompatActivity() {
     }
 
     private fun saveData() {
-        refData = FirebaseDatabase.getInstance().getReference("UserCheckIn")
+        refData = FirebaseDatabase.getInstance().getReference("Checkin")
         auth = FirebaseAuth.getInstance()
-        val data = intent.getParcelableExtra<KosPutra>("checkIn")
+        val putra = intent.getParcelableExtra<KosPutra>("checkIn")
 
         val nama = auth.currentUser?.displayName.toString()
         val idUser = auth.currentUser?.uid.toString()
         val emailUser = auth.currentUser?.email.toString()
         val photoUser = auth.currentUser?.photoUrl.toString()
-        val poster = data?.poster
+        val poster = putra?.poster
         val statusUser = checkInBinding.resultStatus.text.toString()
         val kamarUser = checkInBinding.resultKamar.text.toString()
         val sewaUser = checkInBinding.resultBulan.text.toString()
         val phoneUser = checkInBinding.etPhone.text.toString()
         val alamatUser = checkInBinding.etAlamat.text.toString()
-        val hasil = data?.price
+        val hasil = putra?.price
         val priceUser = hasil!!.toInt() * sewaUser.toInt()
         val fasilitas = checkInBinding.tvFasilitas.text.toString()
         val pending = checkInBinding.pending.text.toString()
         val tanggal = checkInBinding.tvDate.text.toString()
 
-        if (phoneUser.isEmpty()) {
-            checkInBinding.etPhone.error = "Silahkan masukan no WhatsApp anda"
+        if (phoneUser.equals("")) {
+            checkInBinding.etPhone.error = "Silahkan masukan no Hp anda"
             checkInBinding.etPhone.requestFocusFromTouch()
-        } else if (alamatUser.isEmpty()) {
+        } else if (alamatUser.equals("")) {
             checkInBinding.etAlamat.error = "Silahkan masukan alamat lengkap anda"
             checkInBinding.etAlamat.requestFocusFromTouch()
         }
 
-        val userId = refData.push().key
+        val userId = refData.push().child(idUser).key
         refData.setValue("Free", fasilitas)
         refData.setValue("Proses", pending)
         val checkIn = CheckIn(nama, idUser, emailUser, photoUser, poster, statusUser, kamarUser, sewaUser.toInt(), phoneUser, alamatUser, priceUser, fasilitas, pending, tanggal)
 
-        if (phoneUser.isEmpty() && alamatUser.isEmpty()) {
-            if (userId != null) {
-                refData.child(userId).setValue(checkIn).addOnCanceledListener {
-                    refData.removeValue()
-                }
+        if (phoneUser.isNotEmpty() && alamatUser.isNotEmpty()) {
+            refData.child(userId!!).setValue(checkIn).addOnCompleteListener {
+                startActivity(
+                    Intent(this, CheckOutActivity::class.java)
+                        .putExtra("data", putra)
+                )
+                finishAndRemoveTask()
             }
         } else {
-            if (userId != null) {
-                refData.child(userId).setValue(checkIn).addOnCompleteListener {
-                    val intent = Intent(this, CheckOutActivity::class.java)
-                    startActivity(intent)
-                    finishAndRemoveTask()
-                }
+            refData.child(userId!!).setValue(checkIn).addOnFailureListener {
+                refData.removeValue()
             }
         }
     }
